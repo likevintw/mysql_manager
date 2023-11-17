@@ -1,0 +1,17 @@
+*__pycache__/
+*.DS_Store
+*.pdf
+*.jpg
+*.JPG
+*.png
+*.PNG
+*.a
+*.o
+*.so
+*.bin
+*.bmp
+*.xmind
+*.txt
+*.xlsx
+*.zip
+*.txt

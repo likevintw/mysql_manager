@@ -1,4 +1,4 @@
-image: mysql:8.2.0
+image: alpine:3.17
 
 variables:
   MYSQL_DATABASE: $MYSQL_DATABASE
@@ -10,7 +10,8 @@ stages:
 connect:
   stage: database
   script:
-  - echo "SELECT 'OK';" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD"
+  - echo $(docker ps -a)
+  # - echo "SELECT 'OK';" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD"
 
 # login_datebase:
 #   stage: database

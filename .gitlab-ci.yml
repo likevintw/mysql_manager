@@ -1,0 +1,133 @@
+image: mysql:8.2.0
+
+variables:
+  MYSQL_DATABASE: $MYSQL_DATABASE
+  MYSQL_ROOT_PASSWORD: "testpassword"
+
+stages:
+  - database
+
+connect:
+  stage: database
+  script:
+  - echo "SELECT 'OK';" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD"
+
+# login_datebase:
+#   stage: database
+#   needs: ["create_datebase"]
+#   script:
+#     - mysql -u root -p $MYSQL_ROOT_PASSWORD
+
+# create_datebase:
+#   stage: database
+#   script:
+#     - create <>
+
+# create_table:
+#   stage: database
+#   needs: ["create_datebase"]
+#   script:
+#     - echo 'create_table'
+
+# run-in-pre-stage:
+#   stage: .pre
+#   script:
+#     - echo "run-in-pre-stage"
+
+# run-in-post-stage:
+#   tags: ["kevin-mac"]
+#   stage: .post
+#   script:
+#     - echo "run-in-post-stage"
+
+# run-in-first-stage:
+#   tags: ["kevin-mac"]
+#   stage: first
+#   script:
+#     - echo "run-in-code-test-stage"
+
+# run-in-second-stage:
+#   tags: ["kevin-mac"]
+#   stage: second
+#   script:
+#     - echo "run-in-code-test-stage"
+
+# say-hello:
+#   tags: ["kevin-mac"]
+#   stage: first
+#   script:
+#     - echo "Hello World"
+
+# run-after-say-hello:
+#   tags: ["kevin-mac"]
+#   stage: first
+#   needs: ["say-hello"]
+#   script:
+#     - echo $GITLAB_DEMO
+
+# run-when-in-main-branch:
+#   tags: ["kevin-mac"]
+#   stage: third
+#   only:
+#     - main
+#   script:
+#     - echo "run only in main branch"
+
+# run-when-not-in-main-branch:
+#   tags: ["kevin-mac"]
+#   stage: third
+#   except:
+#     - main
+#   script:
+#     - echo "run except in main branch"
+
+# .get_cpu_information_in_linux:
+#   tags: ["kevin-mac"]
+#   stage: first
+#   script:
+#     - echo "get cpu information"
+#     - chmod 777 show_cpu_information.sh
+#     - ./show_cpu_information.sh >> cpu_information.txt
+#   artifacts:
+#     paths:
+#       - cpu_information.txt
+#     expire_in: "1 hours"
+
+# .job_does_not_work:
+#   script:
+#       - echo "this is a template job, for inheriting only, does not work in the pipline"
+
+# .run_template_procedure:
+#   variables:
+#     DESCRIPTION: "standard"
+#   script:
+#       - echo "run $DESCRIPTION procedure"
+
+# run_advance_procedure:
+#   tags: ["kevin-mac"]
+#   stage: third
+#   extends: ".run_template_procedure"
+#   variables:
+#     DESCRIPTION: "advance"
+
+# run_job_in_another_image:
+#   tags: ["kevin-mac"]
+#   image: python:3.13-rc-alpine3.17
+#   stage: third
+#   script:
+#       - python3 --version
+
+# run_docker_version:
+#   stage: third
+#   script:
+#     - docker --version
+
+# build_docker_image:
+#   tags: ["kevin-mac"]
+#   stage: third
+#   needs: ["run_docker_version"]
+#   script:
+#     - chmod 777 get_version.sh
+#     - export IMAGE_VERSION=$(./get_version.sh)
+#     - docker build -t $CI_REGISTRY_IMAGE:$IMAGE_VERSION .
+

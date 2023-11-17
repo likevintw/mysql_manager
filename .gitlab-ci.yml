@@ -10,8 +10,7 @@ stages:
 connect:
   stage: database
   script:
-  - echo $(docker ps -a)
-  # - echo "SELECT 'OK';" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD"
+  - echo "SELECT 'OK';" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD"
 
 # login_datebase:
 #   stage: database

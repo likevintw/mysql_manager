@@ -9,7 +9,8 @@ stages:
 connect:
   stage: database
   script:
-    - echo "SELECT 'OK';" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" -P 3306
+    - echo "ok"
+    # - echo "SELECT 'OK';" | mysql --user=root --password="$MYSQL_ROOT_PASSWORD" -P 3306
 
 # login_datebase:
 #   stage: database

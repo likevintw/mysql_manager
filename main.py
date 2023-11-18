@@ -30,26 +30,29 @@ class Handler:
             return None
         if len(result) == 0:
             return None
-        print("")
         for i in result:
             print(i)
+        print("")
 
 
 class Process:
     def __init__(self) -> None:
         pass
 
-    def current(self, handler):
+    def run_singl_sheet_example(self, handler):
         database = 'demo'
 
+        print('show databases')
         command = 'show databases;'.format(database)
         result = handler.execute(command)
         handler.print_result(result)
 
+        print('use database')
         command = 'use {};'.format(database)
         result = handler.execute(command)
         handler.print_result(result)
 
+        print('create table')
         command = """
             create table users(
             default_id integer auto_increment primary key,
@@ -62,6 +65,7 @@ class Process:
         result = handler.execute(command)
         handler.print_result(result)
 
+        print('insert data')
         command = """
             insert into users
             (name,mail,phone,messages)
@@ -95,34 +99,64 @@ class Process:
         result = handler.execute(command)
         handler.print_result(result)
 
+        print('show data')
         command = """
             select * from users;
             """
         result = handler.execute(command)
         handler.print_result(result)
 
+        print('show data with condition')
         command = """
             select * from users where name='jay';
             """
         result = handler.execute(command)
         handler.print_result(result)
 
+        print('show data order by')
         command = """
             select * from users order by name;
             """
         result = handler.execute(command)
         handler.print_result(result)
 
+        print('delete sepecific data')
         command = "delete from users where name='amy';"
         result = handler.execute(command)
         handler.print_result(result)
 
+        print('show data order by')
         command = """
             select * from users order by name;
             """
         result = handler.execute(command)
         handler.print_result(result)
 
+        print('update data')
+        command = """
+            UPDATE users
+            set name='jjj'
+            where
+            name='jay';
+            """.format('jay', 'jay@qq.com', '0912345678', 'homosexuality')
+        result = handler.execute(command)
+        handler.print_result(result)
+
+        print('show data order by')
+        command = """
+            select * from users order by name;
+            """
+        result = handler.execute(command)
+        handler.print_result(result)
+
+        print('limit')
+        command = """
+            select * from users limit 2;
+            """
+        result = handler.execute(command)
+        handler.print_result(result)
+
+        print('drop table')
         command = """
             drop table users;
             """
@@ -133,4 +167,4 @@ class Process:
 if __name__ == '__main__':
     handler = create_handler('0.0.0.0', 'root', 'testpassword', 'demo')
     process = Process()
-    process.current(handler)
+    process.run_singl_sheet_example(handler)

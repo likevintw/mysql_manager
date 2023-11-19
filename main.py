@@ -2,17 +2,17 @@ import mysql.connector
 
 
 def create_handler(host, user, password, database):
-    connect = mysql.connector.connect(user=user, password=password,
-                                      host=host, database=database)
-    handler = Handler(connect)
-    connect.ping()
+    connection = mysql.connector.connect(user=user, password=password,
+                                         host=host, database=database)
+    handler = Handler(connection)
+    connection.ping()
     return handler
 
 
 class Handler:
-    def __init__(self, connect) -> None:
-        self.connect = connect
-        self.cursor = connect.cursor()
+    def __init__(self, connection) -> None:
+        self.connection = connection
+        self.cursor = connection.cursor()
 
     def execute(self, command):
         try:
@@ -33,6 +33,13 @@ class Handler:
         for i in result:
             print(i)
         print("")
+
+    def __del__(self):
+        if self.cursor:
+            self.cursor.close()
+        if self.connection:
+            self.connection.close()
+        print("Database connection closed.")
 
 
 class Process:
@@ -168,3 +175,4 @@ if __name__ == '__main__':
     handler = create_handler('0.0.0.0', 'root', 'testpassword', 'demo')
     process = Process()
     process.run_singl_sheet_example(handler)
+    del handler

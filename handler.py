@@ -4,10 +4,12 @@ import random
 import string
 from time import time
 
+
 def create_connector(host, user, password, database):
     connector = mysql.connector.connect(user=user, password=password,
                                         host=host, database=database)
     return connector
+
 
 def create_handler(host, user, password, database):
     connector = mysql.connector.connect(user=user, password=password,

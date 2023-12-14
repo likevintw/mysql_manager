@@ -25,6 +25,7 @@ def timeout(sec):
         return wrapped_func
     return decorator
 
+
 @timeout(2)
 def create_connector(host, user, password, database):
     connector = mysql.connector.connect(
@@ -52,10 +53,11 @@ class Handler:
         self.cursor = self.connector.cursor()
 
     def __del__(self):
-        if self.cursor:
-            self.cursor.close()
-        if self.connector:
-            self.connector.close()
+        pass
+        # if self.cursor:
+        #     self.cursor.close()
+        # if self.connector:
+        #     self.connector.close()
 
     def execute_return_all(self, command):
         try:
